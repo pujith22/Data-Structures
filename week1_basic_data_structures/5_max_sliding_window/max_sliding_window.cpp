@@ -1,23 +1,25 @@
 #include <iostream>
 #include <vector>
+#include <deque>
 
-using namespace std;
+// using namespace std;
 
 using std::cin;
 using std::cout;
 using std::vector;
 using std::max;
+using std::deque;
 
-void pujith22()
-{
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt","r",stdin);
-        freopen("output.txt","w",stdout);
-    #endif
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-}
+// void pujith22()
+// {
+//     #ifndef ONLINE_JUDGE
+//         freopen("input.txt","r",stdin);
+//         freopen("output.txt","w",stdout);
+//     #endif
+//     ios_base::sync_with_stdio(false);
+//     cin.tie(NULL);
+//     cout.tie(NULL);
+// }
 
 void max_sliding_window_naive(vector<int> const & A, int w) {
     for (size_t i = 0; i < A.size() - w + 1; ++i) {
@@ -53,7 +55,7 @@ void max_sliding_window(vector<int> const& arr, int w)
 }
 
 int main() {
-    pujith22();
+    // pujith22();
     int n = 0;
     cin >> n;
 

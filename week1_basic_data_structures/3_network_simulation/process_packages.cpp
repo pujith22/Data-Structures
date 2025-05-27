@@ -2,18 +2,16 @@
 #include <queue>
 #include <vector>
 
-using namespace std;
-
-void pujith22()
-{
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt","r",stdin);
-        freopen("output.txt","w",stdout);
-    #endif
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-}
+// void pujith22()
+// {
+//     #ifndef ONLINE_JUDGE
+//         freopen("input.txt","r",stdin);
+//         freopen("output.txt","w",stdout);
+//     #endif
+//     ios_base::sync_with_stdio(false);
+//     cin.tie(NULL);
+//     cout.tie(NULL);
+// }
 struct Request {
     Request(int arrival_time, int process_time):
         arrival_time(arrival_time),
@@ -93,7 +91,7 @@ void PrintResponses(const std::vector <Response> &responses) {
 }
 
 int main() {
-    pujith22();
+    //pujith22();
     int size;
     std::cin >> size;
     std::vector <Request> requests = ReadRequests();

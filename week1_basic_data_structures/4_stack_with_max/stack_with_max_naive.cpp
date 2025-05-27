@@ -4,7 +4,7 @@
 #include <cassert>
 #include <algorithm>
 
-using namespace std;
+// using namespace std;
 
 using std::cin;
 using std::string;
@@ -12,16 +12,16 @@ using std::vector;
 using std::cout;
 using std::max_element;
 
-void pujith22()
-{
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt","r",stdin);
-        freopen("output.txt","w",stdout);
-    #endif
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-}
+// void pujith22()
+// {
+//     #ifndef ONLINE_JUDGE
+//         freopen("input.txt","r",stdin);
+//         freopen("output.txt","w",stdout);
+//     #endif
+//     ios_base::sync_with_stdio(false);
+//     cin.tie(NULL);
+//     cout.tie(NULL);
+// }
 
 class StackWithMax {
     vector<int> stack;
@@ -51,7 +51,7 @@ class StackWithMax {
 };
 
 int main() {
-    pujith22();
+    // pujith22();
     int num_queries = 0;
     cin >> num_queries;
 
