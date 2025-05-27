@@ -16,7 +16,7 @@ void pujith22()
 {
     #ifndef ONLINE_JUDGE
         freopen("input.txt","r",stdin);
-        freopen("ouput.txt","w",stdout);
+        freopen("output.txt","w",stdout);
     #endif
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
@@ -31,7 +31,7 @@ class StackWithMax {
 
     void Push(int value) {
         stack.push_back(value);
-        if(value>=maxStack.back())
+        if(maxStack.size()==0 || value>=maxStack.back())
             maxStack.push_back(value);
     }
 
