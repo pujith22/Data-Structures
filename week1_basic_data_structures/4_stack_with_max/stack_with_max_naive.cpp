@@ -4,33 +4,54 @@
 #include <cassert>
 #include <algorithm>
 
+using namespace std;
+
 using std::cin;
 using std::string;
 using std::vector;
 using std::cout;
 using std::max_element;
 
+void pujith22()
+{
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt","r",stdin);
+        freopen("ouput.txt","w",stdout);
+    #endif
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+}
+
 class StackWithMax {
     vector<int> stack;
+    vector<int> maxStack;
 
   public:
 
     void Push(int value) {
         stack.push_back(value);
+        if(value>=maxStack.back())
+            maxStack.push_back(value);
     }
 
     void Pop() {
         assert(stack.size());
+        int val = stack.back();
         stack.pop_back();
+        if(val==maxStack.back())
+            maxStack.pop_back();
+
     }
 
     int Max() const {
         assert(stack.size());
-        return *max_element(stack.begin(), stack.end());
+        return maxStack.back();
     }
 };
 
 int main() {
+    pujith22();
     int num_queries = 0;
     cin >> num_queries;
 
