@@ -2,12 +2,25 @@
 #include <vector>
 #include <algorithm>
 
+// using namespace std;
+
 using std::vector;
 using std::cin;
 using std::cout;
 using std::swap;
 using std::pair;
 using std::make_pair;
+
+// void pujith22()
+// {
+//   #ifndef ONLINE_JUDGE
+//     freopen("input.txt","r",stdin);
+//     freopen("output.txt","w",stdout);
+//   #endif
+//   cin.tie(NULL);
+//   cout.tie(NULL);
+//   ios_base::sync_with_stdio(false);
+// }
 
 class HeapBuilder {
  private:
@@ -38,13 +51,27 @@ class HeapBuilder {
     // but in the worst case gives a quadratic number of swaps.
     //
     // TODO: replace by a more efficient implementation
-    for (int i = 0; i < data_.size(); ++i)
-      for (int j = i + 1; j < data_.size(); ++j) {
-        if (data_[i] > data_[j]) {
-          swap(data_[i], data_[j]);
-          swaps_.push_back(make_pair(i, j));
+    for(int i=data_.size()-1;i>=0;i--)
+    {
+      int index = i;
+      while(index<data_.size())
+      {
+        int minIndex = index;
+        if(2*minIndex+1<data_.size() && data_[2*minIndex+1]<data_[minIndex])
+          minIndex = 2*minIndex+1;
+        if(2*minIndex+2<data_.size() && data_[2*minIndex+2]<data_[minIndex])
+          minIndex = 2*minIndex+2;
+        if(minIndex!=index)
+        {
+          auto ele = make_pair(index,minIndex);
+          swaps_.push_back(ele);
+          swap(data_[index],data_[minIndex]);
+          index = minIndex;
         }
+        else
+          break;
       }
+    }
   }
 
  public:
@@ -56,6 +83,7 @@ class HeapBuilder {
 };
 
 int main() {
+  // pujith22();
   std::ios_base::sync_with_stdio(false);
   HeapBuilder heap_builder;
   heap_builder.Solve();
