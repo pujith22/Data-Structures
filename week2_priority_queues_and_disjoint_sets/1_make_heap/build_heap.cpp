@@ -57,10 +57,10 @@ class HeapBuilder {
       while(index<data_.size())
       {
         int minIndex = index;
-        if(2*minIndex+1<data_.size() && data_[2*minIndex+1]<data_[minIndex])
-          minIndex = 2*minIndex+1;
-        if(2*minIndex+2<data_.size() && data_[2*minIndex+2]<data_[minIndex])
-          minIndex = 2*minIndex+2;
+        if(2*index+1<data_.size() && data_[2*index+1]<data_[minIndex])
+          minIndex = 2*index+1;
+        if(2*index+2<data_.size() && data_[2*index+2]<data_[minIndex])
+          minIndex = 2*index+2;
         if(minIndex!=index)
         {
           auto ele = make_pair(index,minIndex);
