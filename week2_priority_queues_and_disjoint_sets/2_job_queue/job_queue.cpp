@@ -1,10 +1,27 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#define int long long
+
+// using namespace std;
 
 using std::vector;
 using std::cin;
 using std::cout;
+using std::priority_queue;
+using std::pair;
+using std::greater;
+
+// void pujith22()
+// {
+//   #ifndef ONLINE_JUDGE
+//     freopen("input.txt","r",stdin);
+//     freopen("output.txt","w",stdout);
+//   #endif
+//   cin.tie(NULL);
+//   cout.tie(NULL);
+//   ios_base::sync_with_stdio(false);
+// }
 
 class JobQueue {
  private:
@@ -29,20 +46,19 @@ class JobQueue {
   }
 
   void AssignJobs() {
-    // TODO: replace this code with a faster algorithm.
     assigned_workers_.resize(jobs_.size());
     start_times_.resize(jobs_.size());
-    vector<long long> next_free_time(num_workers_, 0);
-    for (int i = 0; i < jobs_.size(); ++i) {
-      int duration = jobs_[i];
-      int next_worker = 0;
-      for (int j = 0; j < num_workers_; ++j) {
-        if (next_free_time[j] < next_free_time[next_worker])
-          next_worker = j;
-      }
-      assigned_workers_[i] = next_worker;
-      start_times_[i] = next_free_time[next_worker];
-      next_free_time[next_worker] += duration;
+    std::priority_queue<std::pair<int,int>,vector<pair<int,int>>,std::greater<pair<int,int>>> pq;
+    for(int i=0;i<num_workers_;i++)
+      pq.push({0,i});
+    for(int i=0;i<jobs_.size();i++)
+    {
+      auto thread = pq.top();
+      pq.pop();
+      assigned_workers_[i] = thread.second;
+      start_times_[i] = thread.first;
+      thread.first += jobs_[i];
+      pq.push(thread);
     }
   }
 
@@ -54,7 +70,8 @@ class JobQueue {
   }
 };
 
-int main() {
+int32_t main() {
+  // pujith22();
   std::ios_base::sync_with_stdio(false);
   JobQueue job_queue;
   job_queue.Solve();
