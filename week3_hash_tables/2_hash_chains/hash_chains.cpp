@@ -6,7 +6,18 @@
 using std::string;
 using std::vector;
 using std::cin;
+using std::cout;
 
+// void pujith22()
+// {
+//     #ifndef ONLINE_JUDGE
+//         freopen("input.txt","r",stdin);
+//         freopen("output.txt","w",stdout);
+//     #endif
+//     cin.tie(NULL);
+//     cout.tie(NULL);
+//     std::ios_base::sync_with_stdio(false);
+// }
 struct Query {
     string type, s;
     size_t ind;
@@ -15,18 +26,20 @@ struct Query {
 class QueryProcessor {
     int bucket_count;
     // store all strings in one vector
-    vector<string> elems;
+    vector<vector<string>> elems;
     size_t hash_func(const string& s) const {
         static const size_t multiplier = 263;
-        static const size_t prime = 1000000007;
+        static const size_t prime = 1e9+7;
         unsigned long long hash = 0;
         for (int i = static_cast<int> (s.size()) - 1; i >= 0; --i)
-            hash = (hash * multiplier + s[i]) % prime;
+            hash = (hash * multiplier + s[i] + prime) % prime;
         return hash % bucket_count;
     }
 
 public:
-    explicit QueryProcessor(int bucket_count): bucket_count(bucket_count) {}
+    explicit QueryProcessor(int bucket_count): bucket_count(bucket_count) {
+        elems.resize(bucket_count);
+    }
 
     Query readQuery() const {
         Query query;
@@ -43,23 +56,35 @@ public:
     }
 
     void processQuery(const Query& query) {
-        if (query.type == "check") {
-            // use reverse order, because we append strings to the end
-            for (int i = static_cast<int>(elems.size()) - 1; i >= 0; --i)
-                if (hash_func(elems[i]) == query.ind)
-                    std::cout << elems[i] << " ";
-            std::cout << "\n";
-        } else {
-            vector<string>::iterator it = std::find(elems.begin(), elems.end(), query.s);
-            if (query.type == "find")
-                writeSearchResult(it != elems.end());
-            else if (query.type == "add") {
-                if (it == elems.end())
-                    elems.push_back(query.s);
-            } else if (query.type == "del") {
-                if (it != elems.end())
-                    elems.erase(it);
-            }
+     if(query.type=="add")
+     {
+        auto hashIndex = hash_func(query.s);
+        for(string s: elems[hashIndex])
+            if(s==query.s)
+                return;
+        elems[hashIndex].push_back(query.s);
+     }
+     else if(query.type == "del")
+    {
+        auto hashIndex = hash_func(query.s);
+        auto it = find(elems[hashIndex].begin(),elems[hashIndex].end(),query.s);
+        if(it!=elems[hashIndex].end())
+            elems[hashIndex].erase(it); 
+    }
+        else if(query.type=="find")
+        {
+            auto hashIndex = hash_func(query.s);
+            auto it = find(elems[hashIndex].begin(),elems[hashIndex].end(),query.s);
+            if(it==elems[hashIndex].end())
+                std::cout<<"no\n";
+            else
+                std::cout<<"yes\n";
+        }
+        else
+        {
+            for(auto it = elems[query.ind].rbegin();it!=elems[query.ind].rend();it++)
+                std::cout<<*it<<" ";
+            std::cout<<"\n";
         }
     }
 
@@ -72,6 +97,7 @@ public:
 };
 
 int main() {
+    // pujith22();
     std::ios_base::sync_with_stdio(false);
     int bucket_count;
     cin >> bucket_count;
