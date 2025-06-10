@@ -13,16 +13,16 @@ struct Query {
     int number;
 };
 
-void pujith22()
-{
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt","r",stdin);
-        freopen("output.txt","w",stdout);
-    #endif
-    cin.tie(NULL);
-    cout.tie(NULL);
-    ios_base::sync_with_stdio(false);
-}
+// void pujith22()
+// {
+//     #ifndef ONLINE_JUDGE
+//         freopen("input.txt","r",stdin);
+//         freopen("output.txt","w",stdout);
+//     #endif
+//     cin.tie(NULL);
+//     cout.tie(NULL);
+//     ios_base::sync_with_stdio(false);
+// }
 
 vector<Query> read_queries() {
     int n;
@@ -60,7 +60,7 @@ vector<string> process_queries(const vector<Query>& queries) {
 }
 
 int main() {
-    pujith22();
+    // pujith22();
     write_responses(process_queries(read_queries()));
     return 0;
 }
