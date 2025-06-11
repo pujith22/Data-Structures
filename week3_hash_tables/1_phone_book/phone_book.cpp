@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#define int long long
 
 using std::string;
 using std::vector;
@@ -46,7 +47,7 @@ void write_responses(const vector<string>& result) {
 vector<string> process_queries(const vector<Query>& queries) {
     vector<string> result;
     // Keep list of all existing (i.e. not deleted yet) contacts.
-    vector<string> contacts(1e8,"not found");
+    vector<string> contacts(1e7+1,"not found");
     for (size_t i = 0; i < queries.size(); ++i){
         if (queries[i].type == "add")
             contacts[queries[i].number] = queries[i].name;
@@ -59,7 +60,7 @@ vector<string> process_queries(const vector<Query>& queries) {
     return result;
 }
 
-int main() {
+int32_t main() {
     // pujith22();
     write_responses(process_queries(read_queries()));
     return 0;
