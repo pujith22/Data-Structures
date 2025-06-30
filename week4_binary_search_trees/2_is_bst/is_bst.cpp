@@ -1,7 +1,6 @@
 #include <algorithm>
 #include <iostream>
 #include <vector>
-#define int long long
 
 // using namespace std;
 using std::cin;
