@@ -5,11 +5,22 @@
 #include <sys/resource.h>
 #endif
 
+// using namespace std;
 using std::vector;
 using std::ios_base;
 using std::cin;
 using std::cout;
 
+// void pujith22()
+// {
+//   #ifndef ONLINE_JUDGE
+//     freopen("input.txt","r",stdin);
+//     freopen("output.txt","w",stdout);
+//   #endif
+//   cin.tie(NULL);
+//   cout.tie(NULL);
+//   ios_base::sync_with_stdio(false);
+// }
 class TreeOrders {
   int n;
   vector <int> key;
@@ -27,12 +38,38 @@ public:
     }
   }
 
+  void in_order_helper(int src,vector<int>&result)
+  {
+    if(src==-1)
+      return;
+    in_order_helper(left[src],result);
+    result.push_back(key[src]);
+    in_order_helper(right[src],result);
+  }
+
+  void pre_order_helper(int src,vector<int>&result)
+  {
+    if(src==-1)
+      return;
+    result.push_back(key[src]);
+    pre_order_helper(left[src],result);
+    pre_order_helper(right[src],result);
+  }
+
+  void post_order_helper(int src,vector<int>&result)
+  {
+    if(src==-1)
+      return;
+    post_order_helper(left[src],result);
+    post_order_helper(right[src],result);
+    result.push_back(key[src]);
+  }
 
   vector <int> in_order() {
     vector<int> result;
     // Finish the implementation
     // You may need to add a new recursive method to do that
-
+    in_order_helper(0,result);
     return result;
   }
 
@@ -40,7 +77,7 @@ public:
     vector<int> result;    
     // Finish the implementation
     // You may need to add a new recursive method to do that
-    
+    pre_order_helper(0,result);
     return result;
   }
 
@@ -48,7 +85,7 @@ public:
     vector<int> result;
     // Finish the implementation
     // You may need to add a new recursive method to do that
-    
+    post_order_helper(0,result);
     return result;
   }
 };
@@ -75,6 +112,7 @@ int main_with_large_stack_space() {
 
 int main (int argc, char **argv)
 {
+  // pujith22();
 #if defined(__unix__) || defined(__APPLE__)
   // Allow larger stack space
   const rlim_t kStackSize = 16 * 1024 * 1024;   // min stack size = 16 MB
